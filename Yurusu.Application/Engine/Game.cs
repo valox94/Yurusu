@@ -1,4 +1,5 @@
 ﻿using Yurusu.Application.Interface;
+using Yurusu.Application.Interface.Machine;
 
 namespace Yurusu.Application.Engine;
 
@@ -30,7 +31,10 @@ public class GameEngine : IGameEngine
 
     public async Task RunAsync()
     {
+        _interface.SetToIntroState();
         await _interface.DisplayAsync(_introText);
         Console.ReadKey();
     }
+    
+    
 }

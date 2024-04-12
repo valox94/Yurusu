@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Yurusu.Application;
 using Yurusu.Application.Engine;
-using Yurusu.Application.Interface;
+using Yurusu.Application.Interface.Machine;
 using Yurusu.UI.Audio.Typing;
 
 namespace Yurusu.Console;
@@ -24,7 +23,9 @@ internal static class Program
     
     public static void AddGameInterfaceServices(this IServiceCollection services)
     {
-        services.AddSingleton<IGameInterface, GameInterface>();
+        services.AddSingleton<IGameInterface, GameInterfaceMachine>();
+        services.AddSingleton<GameInterfaceMachine.IIntroGameState,GameInterfaceMachine.IntroGameState>();
+        services.AddSingleton<GameInterfaceMachine.IGameState, GameInterfaceMachine.IntroGameState>();
         services.AddSingleton<ITypingAudio, TypingAudio>();
         services.AddSingleton<ITypingSound, TypingSound>();
     }
