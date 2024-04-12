@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Audio\Typing\LowBit\Resources\LowBitType1.wav" />
+      <None Remove="Audio\Typing\LowBit\Resources\LowBitType2.wav" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Audio\Typing\WobbleType1.wav" />
+      <EmbeddedResource Include="Audio\Typing\WobbleType1.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>

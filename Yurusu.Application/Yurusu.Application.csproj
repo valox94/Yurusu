@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="crystal_type.wav" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="SoundAssets\SoftBubbleType1.wav" />
+      <None Remove="SoundAssets\SoftBubbleType2.wav" />
+      <None Remove="SoundAssets\SpaceBubbleType1.wav" />
+      <None Remove="SoundAssets\SpaceBubbleType2.wav" />
+      <None Remove="SoundAssets\StrongBubbleType1.wav" />
+      <None Remove="SoundAssets\StrongBubbleType2.wav" />
+      <None Remove="SoundAssets\WeakBubbleType1.wav" />
+      <None Remove="SoundAssets\WeakBubbleType2.wav" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Yurusu.Assets\Yurusu.Assets.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.4" />
+    </ItemGroup>
+
+</Project>
