@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yurusu.Console", "Yurusu.Console\Yurusu.Console.csproj", "{1D7CEF17-E5FB-46DF-B24D-0566CB7FA558}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Occam.Console", "Occam.Console\Occam.Console.csproj", "{1D7CEF17-E5FB-46DF-B24D-0566CB7FA558}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3102AEFF-F248-4A60-957E-48C3684A50A8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{6173C82F-9CB6-4E9D-BAD2-1022A1B57888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yurusu.Domain", "Yurusu.Domain\Yurusu.Domain.csproj", "{86631CCA-A98C-43C7-B5B1-AF480480B8ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Occam.Domain", "Occam.Domain\Occam.Domain.csproj", "{86631CCA-A98C-43C7-B5B1-AF480480B8ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yurusu.Assets", "Yurusu.Assets\Yurusu.Assets.csproj", "{74A95CAB-B7B4-4AA0-B1AE-D5CA2FDD9E34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Occam.Assets", "Occam.Assets\Occam.Assets.csproj", "{74A95CAB-B7B4-4AA0-B1AE-D5CA2FDD9E34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yurusu.Application", "Yurusu.Application\Yurusu.Application.csproj", "{4E2DDE8D-BC57-4C41-9835-714CA59AE719}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Occam.Application", "Occam.Application\Occam.Application.csproj", "{4E2DDE8D-BC57-4C41-9835-714CA59AE719}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yurusu.Unit.Specs", "Yurusu.Unit.Specs\Yurusu.Unit.Specs.csproj", "{7E7494B5-F9FC-4401-B46B-C1A9EC94E816}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Occam.Unit.Specs", "Occam.Unit.Specs\Occam.Unit.Specs.csproj", "{7E7494B5-F9FC-4401-B46B-C1A9EC94E816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

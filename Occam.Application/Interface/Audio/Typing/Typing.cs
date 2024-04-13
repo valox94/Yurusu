@@ -1,4 +1,4 @@
-﻿namespace Yurusu.UI.Audio.Typing;
+﻿namespace Occam.UI.Audio.Typing;
 
 public interface ITypingAudio
 {
@@ -30,7 +30,7 @@ public interface ITypingSound : IGameSound { }
 
 public class TypingSound : GameSound, ITypingSound
 {
-    public TypingSound() : base("Yurusu.Assets.Audio.Typing.WobbleType1.wav")
+    public TypingSound() : base("Occam.Assets.Audio.Typing.WobbleType1.wav")
     {
     }
 }

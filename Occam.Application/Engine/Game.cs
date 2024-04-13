@@ -1,7 +1,7 @@
-﻿using Yurusu.Application.Interface;
-using Yurusu.Application.Interface.Machine;
+﻿using Occam.Application.Interface.Machine;
+using Occam.Application.Interface;
 
-namespace Yurusu.Application.Engine;
+namespace Occam.Application.Engine;
 
 public interface IGameEngine
 {
@@ -32,8 +32,9 @@ public class GameEngine : IGameEngine
     public async Task RunAsync()
     {
         _interface.SetToIntroState();
+        _interface.Initialize();
         await _interface.DisplayAsync(_introText);
-        Console.ReadKey();
+        Console.ReadKey(true);
     }
     
     

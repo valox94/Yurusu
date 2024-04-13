@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Yurusu.Application\Yurusu.Application.csproj" />
-      <ProjectReference Include="..\Yurusu.Assets\Yurusu.Assets.csproj" />
+      <ProjectReference Include="..\Occam.Application\Occam.Application.csproj" />
+      <ProjectReference Include="..\Occam.Assets\Occam.Assets.csproj" />
     </ItemGroup>
 
     <ItemGroup>

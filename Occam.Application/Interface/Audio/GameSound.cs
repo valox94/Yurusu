@@ -1,6 +1,8 @@
 ﻿using System.Media;
 using System.Reflection;
-namespace Yurusu.UI.Audio;
+using Assembly = Occam.Assets.Assembly;
+
+namespace Occam.UI.Audio;
 
 
 public interface IGameSound
@@ -14,24 +16,22 @@ public abstract class GameSound : IGameSound
     private Task _loadingTask;
     protected GameSound(string soundResourceName)
     {
-        var stream = typeof(Yurusu.Assets.Assembly).Assembly.GetManifestResourceStream(soundResourceName);
+        var stream = typeof(Assembly).Assembly.GetManifestResourceStream(soundResourceName);
         if (stream == null)
             throw new InvalidOperationException("Sound resource not found.");
 
         _player = new SoundPlayer(stream);
-        
-        _loadingTask = Task.Run(() => { _player.Load(); });
+        _player.Load();
     }
 
     
     public void PlayLoop()
     {
-        _loadingTask.ContinueWith(t => _player.PlayLooping(), TaskScheduler.Default);
+        _player.PlayLooping();
     }
 
     public void Stop()
     {
-        _loadingTask.ContinueWith(t => _player.Stop(), TaskScheduler.Default);
-
+        _player.Stop();
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Yurusu.Application.Interface.Machine;
+﻿namespace Occam.Application.Interface.Machine;
 
 public partial class GameInterfaceMachine : IGameInterface
 {

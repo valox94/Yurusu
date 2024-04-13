@@ -1,12 +1,13 @@
-﻿using Yurusu.UI.Audio.Typing;
+﻿using Occam.UI.Audio.Typing;
 
-namespace Yurusu.Application.Interface.Machine;
+namespace Occam.Application.Interface.Machine;
 
 public interface IGameInterface
 {
     Task DisplayAsync(string[] introText);
     void SetToIntroState();
-    GameInterfaceMachine.IGameState InternalState { get; set; } 
+    GameInterfaceMachine.IGameState InternalState { get; set; }
+    void Initialize();
 }
 
 public partial class GameInterfaceMachine : IGameInterface
@@ -21,4 +22,8 @@ public partial class GameInterfaceMachine : IGameInterface
 
 
     public IGameState InternalState { get; set; }
+    public void Initialize()
+    {
+        _state.Initialize();
+    }
 }

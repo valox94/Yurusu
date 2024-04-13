@@ -1,4 +1,4 @@
-﻿namespace Yurusu.Assets;
+﻿namespace Occam.Assets;
 
 public class Assembly
 {

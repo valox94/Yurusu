@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Yurusu.Application.Engine;
-using Yurusu.Application.Interface.Machine;
-using Yurusu.UI.Audio.Typing;
+using Occam.Application.Engine;
+using Occam.Application.Interface.Machine;
+using Occam.Application.Interface.View;
+using Occam.UI.Audio.Typing;
 
-namespace Yurusu.Console;
+namespace Occam.Console;
 
 internal static class Program
 {
@@ -26,6 +27,7 @@ internal static class Program
         services.AddSingleton<IGameInterface, GameInterfaceMachine>();
         services.AddSingleton<GameInterfaceMachine.IIntroGameState,GameInterfaceMachine.IntroGameState>();
         services.AddSingleton<GameInterfaceMachine.IGameState, GameInterfaceMachine.IntroGameState>();
+        services.AddSingleton<IViewBox, StoryViewBox>();
         services.AddSingleton<ITypingAudio, TypingAudio>();
         services.AddSingleton<ITypingSound, TypingSound>();
     }
