@@ -6,10 +6,10 @@ namespace Occam.Application.Interface.View;
 public class StoryViewBox : ViewBox
 {
     private const int BOX_HEIGHT = 10;
-    private const int BOX_WIDTH = 40;
+    private const int BOX_WIDTH = 20;
     private const int BOX_PADDING = 1;
     private const char BOX_CHAR = '*';
-
+    private const string HEADER = "~ Story ~";
     private int _leftContentColumn;
     private int _rightContentColumn;
 
@@ -21,6 +21,13 @@ public class StoryViewBox : ViewBox
         
     private int _cursorLeft;
     private int _cursorTop;
+
+    private const char HORIZONTAL_BORDER_CHAR = '═';
+    private const char VERTICAL_BORDER_CHAR = '║';
+    private const char TOP_LEFT_CORNER_CHAR = '╔';
+    private const char TOP_RIGHT_CORNER_CHAR = '╗';
+    private const char BOTTOM_LEFT_CORNER_CHAR = '╚';
+    private const char BOTTOM_RIGHT_CORNER_CHAR = '╝';
 
     public StoryViewBox()
     {
@@ -46,6 +53,7 @@ public class StoryViewBox : ViewBox
     {
         Console.ForegroundColor = ConsoleColor.DarkGray;
         DrawBorders();
+        SetCursorToContentOrigin();
         Console.ResetColor();
     }
 
@@ -56,21 +64,35 @@ public class StoryViewBox : ViewBox
 
     private void DrawBorders()
     {
+        // Create the top border with the header
+        string topBorder = TOP_LEFT_CORNER_CHAR + new string(HORIZONTAL_BORDER_CHAR, 3) + HEADER +
+                           new string(HORIZONTAL_BORDER_CHAR, BOX_WIDTH - HEADER.Length - 5) + TOP_RIGHT_CORNER_CHAR;
+    
         SetCursorPosition(0, 0);
-        Console.WriteLine(new string(BOX_CHAR, BOX_WIDTH));
+        Console.WriteLine(topBorder);
+
+        // Draw the sides
         for (int height = 1; height < BOX_HEIGHT - 1; height++)
         {
             SetCursorPosition(0, height);
-            Console.Write(BOX_CHAR);
+            Console.Write(VERTICAL_BORDER_CHAR);
             SetCursorPosition(BOX_WIDTH - 1, height);
-            Console.Write(BOX_CHAR);
+            Console.Write(VERTICAL_BORDER_CHAR);
         }
+
+        // Create and write the bottom border
+        string bottomBorder = BOTTOM_LEFT_CORNER_CHAR + new string(HORIZONTAL_BORDER_CHAR, BOX_WIDTH - 2) + BOTTOM_RIGHT_CORNER_CHAR;
         SetCursorPosition(0, BOX_HEIGHT - 1);
-        Console.WriteLine(new string(BOX_CHAR, BOX_WIDTH));
+        Console.WriteLine(bottomBorder);
     }
+
 
     public override void Display(string word, ITypingAudio typingAudio)
     {
+        if(_cursorTop == _topContentRow && _cursorLeft == _leftContentColumn && string.IsNullOrWhiteSpace(word))
+        {
+            return;
+        }
         if(_cursorLeft + word.Length > _rightContentColumn)
         {
             if(_cursorTop + 1 >= _bottomContentRow)
@@ -98,6 +120,10 @@ public class StoryViewBox : ViewBox
 
     public override void AddBreak(ITypingAudio typingAudio)
     {
+        if(_cursorTop == _topContentRow && _cursorLeft == _leftContentColumn)
+        {
+            return;
+        }
         if(_cursorTop + 1 >= _bottomContentRow)
         {
             PauseForUserToRead(typingAudio);
