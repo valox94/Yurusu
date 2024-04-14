@@ -2,13 +2,12 @@
 
 namespace Occam.Application.Interface.View;
 
-
-public class StoryViewBox : ViewBox
+public class MenuViewBox : ViewBox
 {
-    private const int BOX_HEIGHT = 10;
-    private const int BOX_WIDTH = 20;
+    private const int BOX_HEIGHT = 30;
+    private const int BOX_WIDTH = 30;
     private const int BOX_PADDING = 1;
-    private const string HEADER = "~ Story ~";
+    private const string HEADER = "~ Main Menue ~";
     private int _leftContentColumn;
     private int _rightContentColumn;
 
@@ -28,9 +27,18 @@ public class StoryViewBox : ViewBox
     private const char BOTTOM_LEFT_CORNER_CHAR = '╚';
     private const char BOTTOM_RIGHT_CORNER_CHAR = '╝';
 
-    public StoryViewBox()
+    public MenuViewBox()
     {
         SetOrigin(0, 0);
+    }
+    
+    public override void Dispose()
+    {
+        for (int top = _originLeft; top < _originTop; top++)
+        {
+            Console.SetCursorPosition(_originLeft, _originTop + top);
+            Console.Write(new string(' ', BOX_WIDTH));
+        }
     }
     
     public override void SetOrigin(int left, int top)
@@ -51,18 +59,9 @@ public class StoryViewBox : ViewBox
     public override void Initialize()
     {
         Console.ForegroundColor = ConsoleColor.DarkGray;
+        SetCursorPosition(0, 0);
         DrawBorders();
-        SetCursorToContentOrigin();
         Console.ResetColor();
-    }
-
-    public override void Dispose()
-    {
-        for (int top = _originTop; top < (_originTop + BOX_HEIGHT); top++)
-        {
-            Console.SetCursorPosition(_originLeft, _originTop + top);
-            Console.Write(new string(' ', BOX_WIDTH));
-        }
     }
 
     private void SetCursorPosition(int left, int top)

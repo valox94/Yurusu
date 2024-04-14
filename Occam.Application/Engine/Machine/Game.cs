@@ -6,6 +6,8 @@ namespace Occam.Application.Engine.Machine;
 public interface IGameEngine
 {
     Task RunAsync();
+    void SetToMenuState();
+    GameEngineMachine.IGameState InternalState { get; set; }
 }
 
 public partial class GameEngineMachine : IGameEngine
@@ -13,7 +15,10 @@ public partial class GameEngineMachine : IGameEngine
     public GameEngineMachine(IGameState state)
     {
         InternalState = state;
+        InternalState.SetMachine(this);
     }
 
-    protected IGameState InternalState { get; set; }
+    public IGameState InternalState { get; set; }
+
+    
 }

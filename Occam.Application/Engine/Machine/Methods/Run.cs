@@ -9,7 +9,7 @@ public partial class GameEngineMachine
         await InternalState.RunAsync();
     }
 
-    public class IntroGameState : Machine.GameEngineMachine.IGameState 
+    public partial class IntroGameState : GameState
     {
         private readonly string[] _introText = new string[]
         {
@@ -30,12 +30,29 @@ public partial class GameEngineMachine
             _interface = @interface;
         }
         
-        public async Task RunAsync()
+        public override async Task RunAsync()
         {
             _interface.SetToIntroState();
             _interface.Initialize();
             await _interface.DisplayAsync(_introText);
             Console.ReadKey(true);
+            Machine.SetToMenuState();
+        }
+    }
+    public partial class GameMenuState : GameState
+    {
+        private readonly string[] _menu = new string[]
+        {
+            "MAIN MENU",
+        };
+
+        public override async Task RunAsync()
+        {
+            _interface.SetToMenuState();
+            _interface.Initialize();
+            await _interface.DisplayAsync(_menu);
+            Console.ReadKey(true);
+            //TODO: Implement menu options
         }
     }
 }

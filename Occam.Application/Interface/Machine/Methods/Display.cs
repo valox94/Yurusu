@@ -5,20 +5,20 @@ namespace Occam.Application.Interface.Machine;
 
 public partial class GameInterfaceMachine : IGameInterface
 {
-    public async Task DisplayAsync(string[] message)
+    public async Task DisplayAsync(string[] text)
     {
-        await _state.DisplayAsync(message);
+        await InternalState.DisplayAsync(text);
     }
     
     public interface IIntroGameState : IGameState { }
     
-    public class IntroGameState : GameState, IIntroGameState
+    public partial class IntroGameState : GameState, IIntroGameState
     {
-        private readonly IViewBox _StoryViewBox;
+        private readonly IViewBox _storyViewBox;
 
         public IntroGameState(ITypingAudio typingAudio, IViewBox storyViewBox) : base(typingAudio)
         {
-            _StoryViewBox = storyViewBox;
+            _storyViewBox = storyViewBox;
         }
 
         public override async Task DisplayAsync(string[] message)
@@ -33,21 +33,41 @@ public partial class GameInterfaceMachine : IGameInterface
                 foreach (var word in words)
                 {
                     await Task.Delay(60);
-                    _StoryViewBox.Display(word + " ",TypingAudio);
+                    _storyViewBox.Display(word + " ",TypingAudio);
                 }
                 if (currentLine < message.Length)
                 {
                     await Task.Delay(100);
-                    _StoryViewBox.AddBreak(TypingAudio);
+                    _storyViewBox.AddBreak(TypingAudio);
                 }
             }
             TypingAudio.StopTyping();
         }
+    }
 
-        public override void Initialize()
+    public partial class GameMenuState
+    {
+        public override async Task DisplayAsync(string[] message)
         {
-            Console.CursorVisible = false;
-            _StoryViewBox.Initialize();
+            TypingAudio.StartTyping();
+            var currentLine = 0;
+            foreach (var line in message)
+            {
+                currentLine++;
+                var words = line.Split(" ");
+                
+                foreach (var word in words)
+                {
+                    _menuViewBox.Display(word + " ",TypingAudio);
+                }
+                if (currentLine < message.Length)
+                {
+                    _menuViewBox.AddBreak(TypingAudio);
+                }
+            }
+            
+            TypingAudio.StopTyping();
+
         }
     }
 }

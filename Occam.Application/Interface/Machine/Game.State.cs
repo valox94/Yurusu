@@ -12,6 +12,7 @@ public partial class GameInterfaceMachine
         Task DisplayAsync(string[] message);
         void TransitionToIntroState();
         void Initialize();
+        void TransitionToMenuState();
     }
     
     public abstract class GameState : IGameState
@@ -30,11 +31,15 @@ public partial class GameInterfaceMachine
         }
 
         public abstract Task DisplayAsync(string[] message);
+        
         public void TransitionToIntroState()
         {
             Machine.InternalState = new IntroGameState(TypingAudio, new StoryViewBox());
         }
 
         public abstract void Initialize();
+        
+        public virtual void TransitionToMenuState() { }
     }
 }
+

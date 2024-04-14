@@ -10,6 +10,7 @@ public interface IViewBox
     void Reset();
     void AddBreak(ITypingAudio typingAudio);
     void Initialize();
+    void Dispose();
 }
 public abstract class ViewBox : IViewBox
 {
@@ -18,4 +19,5 @@ public abstract class ViewBox : IViewBox
     public abstract void Reset();
     public abstract void AddBreak(ITypingAudio typingAudio);
     public abstract void Initialize();
+    public abstract void Dispose();
 }
