@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Occam.Application.Engine;
+using Occam.Application.Engine.Machine;
 using Occam.Application.Interface.Machine;
 using Occam.Application.Interface.View;
 using Occam.UI.Audio.Typing;
@@ -11,7 +11,7 @@ internal static class Program
     private static void Main(string[] args)
     {
         var services = new ServiceCollection()
-            .AddSingleton<IGameEngine, GameEngine>();
+            .AddSingleton<IGameEngine, GameEngineMachine>();
         
         services.AddGameInterfaceServices();
         
@@ -27,6 +27,8 @@ internal static class Program
         services.AddSingleton<IGameInterface, GameInterfaceMachine>();
         services.AddSingleton<GameInterfaceMachine.IIntroGameState,GameInterfaceMachine.IntroGameState>();
         services.AddSingleton<GameInterfaceMachine.IGameState, GameInterfaceMachine.IntroGameState>();
+        services.AddSingleton<GameEngineMachine.IGameState, GameEngineMachine.IntroGameState>();
+
         services.AddSingleton<IViewBox, StoryViewBox>();
         services.AddSingleton<ITypingAudio, TypingAudio>();
         services.AddSingleton<ITypingSound, TypingSound>();
