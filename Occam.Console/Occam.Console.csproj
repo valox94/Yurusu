@@ -16,4 +16,8 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.3.24172.9" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="ViewComponents\" />
+    </ItemGroup>
+
 </Project>
