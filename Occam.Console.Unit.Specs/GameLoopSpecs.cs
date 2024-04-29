@@ -73,7 +73,6 @@ public class GameLoopSpecs
             loop.Run();
             A.CallTo(() => view.Render()).MustHaveHappenedOnceExactly();
         }
-
         [Fact]
         public void should_render_view_when_it_changes()
         {
@@ -89,7 +88,14 @@ public class GameLoopSpecs
             
             var loop = new GameLoop(firstView, playerInputService);
             
-            SetupPreconditions(firstView, loop, secondView);
+            //First Run
+            A.CallTo(() => firstView.ReceivePlayerInput(new ConsoleKeyInfo(), out v)).Returns(false).Twice(); 
+            loop.Run();
+            A.CallTo(() => secondView.Render()).MustNotHaveHappened();
+            
+            //Second Run
+            loop.Run();
+            A.CallTo(() => secondView.Render()).MustNotHaveHappened();
 
             //Setup
             A.CallTo(() => firstView.ReceivePlayerInput(new ConsoleKeyInfo(), out secondView)).Returns(true).Once(); 
@@ -103,18 +109,5 @@ public class GameLoopSpecs
             A.CallTo(() => secondView.Render()).MustHaveHappenedOnceExactly();
         }
 
-        private static void SetupPreconditions(IMainMenuView firstView, GameLoop loop, IView secondView)
-        {
-            IView? v;
-            //First Run
-            A.CallTo(() => firstView.ReceivePlayerInput(new ConsoleKeyInfo(), out v)).Returns(false).Twice(); 
-            loop.Run();
-            A.CallTo(() => secondView.Render()).MustNotHaveHappened();
-            
-            //Second Run
-            loop.Run();
-            A.CallTo(() => secondView.Render()).MustNotHaveHappened();
-            
-        }
     }
 }
