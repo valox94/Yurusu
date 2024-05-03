@@ -1,11 +1,12 @@
-namespace Occam.Console.Views;
+namespace Occam.Console.Views.Components;
 
 public interface IViewComponent : IView
 {
-    // Interface methods if needed
+    void SetSize(int width, int height);
+    void SetTitle(string title);
 }
 
-public class ViewComponent : IViewComponent
+public abstract class ViewComponent : IViewComponent
 {
     private readonly IGameConsole _console;
     private const char HORIZONTAL_BORDER_CHAR = '═';
@@ -16,12 +17,14 @@ public class ViewComponent : IViewComponent
     private const char BOTTOM_RIGHT_CORNER_CHAR = '╝';
     private int _maxHeight = 0;
     private int _maxWidth = 0;
+    private string _title;
+    private readonly IViewComponentTitle _viewComponentTitle;
 
-    public ViewComponent(IGameConsole console)
+    public ViewComponent(IGameConsole console, IViewComponentTitle viewComponentTitle)
     {
         _console = console;
+        _viewComponentTitle = viewComponentTitle;
     }
-
     public bool ReceivePlayerInput(ConsoleKeyInfo keyInfo, out IView? view)
     {
         throw new NotImplementedException();
@@ -32,7 +35,10 @@ public class ViewComponent : IViewComponent
         RenderHorizontalBorder(0, TOP_LEFT_CORNER_CHAR, TOP_RIGHT_CORNER_CHAR);
         RenderSideBorders();
         RenderHorizontalBorder(_maxHeight - 1, BOTTOM_LEFT_CORNER_CHAR, BOTTOM_RIGHT_CORNER_CHAR);
+        _viewComponentTitle.Render();
     }
+
+
 
     private void RenderSideBorders()
     {
@@ -40,10 +46,10 @@ public class ViewComponent : IViewComponent
         {
             for (int y = 1; y < _maxHeight - 1; y++)
             {
-                WriteAt(0, y, VERTICAL_BORDER_CHAR);
+                _console.WriteAt(0, y, VERTICAL_BORDER_CHAR);
                 if (_maxWidth > 1)
                 {
-                    WriteAt(_maxWidth - 1, y, VERTICAL_BORDER_CHAR);
+                    _console.WriteAt(_maxWidth - 1, y, VERTICAL_BORDER_CHAR);
                 }
             }
         }
@@ -53,19 +59,14 @@ public class ViewComponent : IViewComponent
     {
         if (_maxWidth < 2) return; // Ensure there's room for at least two corners
 
-        WriteAt(0, y, leftCorner);
+        _console.WriteAt(0, y, leftCorner);
         for (int x = 1; x < _maxWidth - 1; x++)
         {
-            WriteAt(x, y, HORIZONTAL_BORDER_CHAR);
+            _console.WriteAt(x, y, HORIZONTAL_BORDER_CHAR);
         }
-        WriteAt(_maxWidth - 1, y, rightCorner);
+        _console.WriteAt(_maxWidth - 1, y, rightCorner);
     }
-
-    private void WriteAt(int x, int y, char character)
-    {
-        _console.SetCursorPosition(x, y);
-        _console.Write(character);
-    }
+    
 
     public void SetSize(int width, int height)
     {
@@ -74,5 +75,12 @@ public class ViewComponent : IViewComponent
 
         _maxWidth = width;
         _maxHeight = height;
+        
+        _viewComponentTitle.SetMaxLength(width);
+    }
+
+    public void SetTitle(string title)
+    {
+        _viewComponentTitle.SetValue(title);
     }
 }

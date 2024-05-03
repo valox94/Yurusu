@@ -5,6 +5,7 @@ public interface IGameConsole
     ConsoleKeyInfo ReadKey();
     void SetCursorPosition(int left, int top);
     void Write(char s);
+    void WriteAt(int x, int y, char character);
 }
 
 
@@ -23,5 +24,11 @@ public class GameConsole : IGameConsole
     public void Write(char s)
     {
         System.Console.Write(s);
+    }
+    
+    public void WriteAt(int x, int y, char character)
+    {
+        SetCursorPosition(x, y);
+        Write(character);
     }
 }

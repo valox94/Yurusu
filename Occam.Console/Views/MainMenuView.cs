@@ -1,3 +1,5 @@
+using Occam.Console.Views.Components;
+
 namespace Occam.Console.Views;
 
 public interface IMainMenuView : IView
@@ -6,10 +8,12 @@ public interface IMainMenuView : IView
 public class MainMenuView : IMainMenuView
 {
     private readonly IGameConsole _console;
+    private readonly INarrativeViewComponent _narrativeViewComponent;
 
-    public MainMenuView(IGameConsole console)
+    public MainMenuView(IGameConsole console, INarrativeViewComponent narrativeViewComponent)
     {
         _console = console;
+        _narrativeViewComponent = narrativeViewComponent;
     }
 
     public bool ReceivePlayerInput(ConsoleKeyInfo keyInfo, out IView? view)
@@ -19,8 +23,8 @@ public class MainMenuView : IMainMenuView
 
     public void Render()
     {
-        _console.SetCursorPosition(0, 0);
-        _console.SetCursorPosition(1, 0);
-        _console.SetCursorPosition(2, 0);
+        _narrativeViewComponent.SetSize(25,10);
+        _narrativeViewComponent.SetTitle("Narrative");
+        _narrativeViewComponent.Render();
     }
 }

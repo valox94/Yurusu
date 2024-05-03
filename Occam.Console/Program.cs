@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Occam.Console.Views;
+using Occam.Console.Views.Components;
 
 namespace Occam.Console;
 
@@ -24,5 +25,8 @@ internal static class Program
     {
         services.AddSingleton<IGameConsole, GameConsole>();
         services.AddSingleton<IPlayerInputService, PlayerInputService>();
+        services.AddSingleton<INarrativeViewComponent, NarrativeViewComponent>();
+        services.AddSingleton<IMainMenuView, MainMenuView>();
+        services.AddSingleton<IViewComponentTitle, ViewComponentTitle>();
     }
 }
