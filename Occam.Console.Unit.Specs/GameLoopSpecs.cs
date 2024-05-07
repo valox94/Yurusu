@@ -9,7 +9,7 @@ public class GameLoopSpecs
     public class RunSpecs
     {
         [Fact]
-        public void should_return_true_generally()
+        public void Should_return_true_generally()
         {
             var view = A.Fake<IMainMenuView>();
             var playerInputService = A.Fake<IPlayerInputService>();
@@ -19,7 +19,7 @@ public class GameLoopSpecs
             Assert.True(loop.Run());
         }
         [Fact]
-        public void should_return_false_when_the_player_quits()
+        public void Should_return_false_when_the_player_quits()
         {
             var view = A.Fake<IMainMenuView>();
         
@@ -74,7 +74,7 @@ public class GameLoopSpecs
             A.CallTo(() => view.Render()).MustHaveHappenedOnceExactly();
         }
         [Fact]
-        public void should_render_view_when_it_changes()
+        public void Should_render_view_when_it_changes()
         {
             var firstView = A.Fake<IMainMenuView>();
             var secondView = A.Fake<IView>();

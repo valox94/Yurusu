@@ -5,6 +5,7 @@ public interface IViewComponentTitle
     public void Render();
     public void SetValue(string title);
     void SetMaxLength(int length);
+    void SetPosition(int xPosition, int yPosition);
 }
 
 public class ViewComponentTitle : IViewComponentTitle
@@ -12,6 +13,8 @@ public class ViewComponentTitle : IViewComponentTitle
     private readonly IGameConsole _console;
     private string _title = string.Empty;
     private int _maxLength = 0;
+    private int _xPosition;
+    private int _yPosition;
 
     public ViewComponentTitle(IGameConsole console)
     {
@@ -26,7 +29,7 @@ public class ViewComponentTitle : IViewComponentTitle
 
         if (_maxLength <= 7) return;
         
-        _console.WriteAt(1, 0,' ');
+        _console.WriteAt(1+_xPosition, 0+_yPosition,' ');
     
         for (int i = 2; i < titleLength + 2; i++)
         {
@@ -37,17 +40,17 @@ public class ViewComponentTitle : IViewComponentTitle
                     break;
                 }
                 
-                _console.WriteAt(i,0, _title[i - 2]);
+                _console.WriteAt(i+_xPosition,0+_yPosition, _title[i - 2]);
             }
         }
 
         if (titleLength + 2 < _maxLength - 1)
         {
-            _console.WriteAt(titleLength + 2, 0,' ');
+            _console.WriteAt(titleLength + 2 +_xPosition, 0+_yPosition,' ');
         }
         else
         {
-            _console.WriteAt(_maxLength-1,0,' ');
+            _console.WriteAt(_maxLength-1+_xPosition,0+_yPosition,' ');
         }
     }
     
@@ -59,5 +62,11 @@ public class ViewComponentTitle : IViewComponentTitle
     public void SetMaxLength(int maxLength)
     {
         _maxLength = maxLength;
+    }
+
+    public void SetPosition(int xPosition, int yPosition)
+    {
+        _xPosition = xPosition;
+        _yPosition = yPosition;
     }
 }

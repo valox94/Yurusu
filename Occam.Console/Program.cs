@@ -26,6 +26,7 @@ internal static class Program
         services.AddSingleton<IGameConsole, GameConsole>();
         services.AddSingleton<IPlayerInputService, PlayerInputService>();
         services.AddSingleton<INarrativeViewComponent, NarrativeViewComponent>();
+        services.AddSingleton<IContentViewComponent, ContentViewComponent>();
         services.AddSingleton<IMainMenuView, MainMenuView>();
         services.AddSingleton<IViewComponentTitle, ViewComponentTitle>();
     }

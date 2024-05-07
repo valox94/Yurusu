@@ -10,7 +10,7 @@ public class MainMenuViewSpecs
     // public class ReceivePlayerInputSpecs
     // {
     //     [Fact]
-    //     public void should_do_something()
+    //     public void Should_do_something()
     //     {
     //         // Arrange
     //         // Act
@@ -20,7 +20,7 @@ public class MainMenuViewSpecs
     public class RenderSpecs
     {
         [Fact]
-        public void should_render_narrative_view_component()
+        public void Should_render_narrative_view_component()
         {
             var console = A.Fake<IGameConsole>();
             var narrativeViewComponent = A.Fake<INarrativeViewComponent>();
@@ -31,7 +31,7 @@ public class MainMenuViewSpecs
             A.CallTo(() => narrativeViewComponent.Render()).MustHaveHappened();
         }
         [Fact]
-        public void should_set_size_of_narrative_view_component()
+        public void Should_set_size_of_narrative_view_component()
         {
             var console = A.Fake<IGameConsole>();
             var narrativeViewComponent = A.Fake<INarrativeViewComponent>();
@@ -42,7 +42,7 @@ public class MainMenuViewSpecs
             A.CallTo(() => narrativeViewComponent.SetSize(25,10)).MustHaveHappened();
         }
         [Fact]
-        public void should_set_title_of_narrative_view_component()
+        public void Should_set_title_of_narrative_view_component()
         {
             var console = A.Fake<IGameConsole>();
             var narrativeViewComponent = A.Fake<INarrativeViewComponent>();
@@ -51,6 +51,28 @@ public class MainMenuViewSpecs
             mainMenuView.Render();
             
             A.CallTo(() => narrativeViewComponent.SetTitle("Narrative")).MustHaveHappened();
+        }
+        [Fact]
+        public void Should_set_content_of_narrative_view_component()
+        {
+            var console = A.Fake<IGameConsole>();
+            var narrativeViewComponent = A.Fake<INarrativeViewComponent>();
+            var mainMenuView = new MainMenuView(console, narrativeViewComponent);
+            
+            mainMenuView.Render();
+            
+            A.CallTo(() => narrativeViewComponent.SetContent(A<string>.Ignored)).MustHaveHappened();
+        }
+        [Fact]
+        public void Should_set_position_of_narrative_view_component()
+        {
+            var console = A.Fake<IGameConsole>();
+            var narrativeViewComponent = A.Fake<INarrativeViewComponent>();
+            var mainMenuView = new MainMenuView(console, narrativeViewComponent);
+            
+            mainMenuView.Render();
+            
+            A.CallTo(() => narrativeViewComponent.SetPosition(A<int>.Ignored,A<int>.Ignored)).MustHaveHappened();
         }
     }
 }
