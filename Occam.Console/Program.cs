@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
+﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Occam.Console.Views;
-using Occam.Console.Views.Components;
+using Occam.Application;
 
 namespace Occam.Console;
 
@@ -9,25 +8,26 @@ internal static class Program
 {
     private static void Main(string[] args)
     {
-        var services = new ServiceCollection()
-            .AddSingleton<IGameLoop, GameLoop>();
+        var services = new ServiceCollection();
         
-        services.AddServices();
-        
-        var serviceProvider = services.BuildServiceProvider();
+        var appAssembly = typeof(AppSettings).Assembly;
+        var consoleAssembly = typeof(ConsoleSettings).Assembly;
 
-        var loop = serviceProvider.GetRequiredService<IGameLoop>();
         
-        while (loop.Run()) { }
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssembly(appAssembly));
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssembly(consoleAssembly));
+        
+        // services.AddSingleton<IGameEngine, GameEngine>();
+
+        var serviceProvider = services.BuildServiceProvider();
+        
+        var mediatR = serviceProvider.GetRequiredService<IMediator>();
+
+        mediatR.Send(new RunApplication.Request()).GetAwaiter().GetResult();
+
     }
     
-    public static void AddServices(this IServiceCollection services)
-    {
-        services.AddSingleton<IGameConsole, GameConsole>();
-        services.AddSingleton<IPlayerInputService, PlayerInputService>();
-        services.AddSingleton<INarrativeViewComponent, NarrativeViewComponent>();
-        services.AddSingleton<IContentViewComponent, ContentViewComponent>();
-        services.AddSingleton<IMainMenuView, MainMenuView>();
-        services.AddSingleton<IViewComponentTitle, ViewComponentTitle>();
-    }
 }
+

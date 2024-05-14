@@ -8,17 +8,12 @@
 
     <ItemGroup>
       <PackageReference Include="FakeItEasy" Version="8.2.0" />
-      <PackageReference Include="MediatR" Version="12.2.0" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-      <PackageReference Include="xunit" Version="2.7.1" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+      <PackageReference Include="xunit" Version="2.8.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Occam.Console\Occam.Console.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="GameLoopSpecs.cs" />
+      <ProjectReference Include="..\Occam.UI\Occam.UI.csproj" />
     </ItemGroup>
 
 </Project>

@@ -25,9 +25,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Occam.Assets\Occam.Assets.csproj" />
+      <ProjectReference Include="..\Occam.UI\Occam.UI.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.2.0" />
       <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.4" />
     </ItemGroup>
 
